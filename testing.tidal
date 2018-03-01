@@ -1,0 +1,3 @@
+d1 $ s "sn" # portion "0.3"
+
+let (portion,portion_p) = pF "portion" (Just 1)
