@@ -1,6 +1,7 @@
 
 try{
-var	ws = new WebSocket("ws://"+location.hostname+":"+location.port, 'echo-protocol');
+	var	ws = new WebSocket("ws://"+location.hostname+":"+location.port, 'echo-protocol');
+	console.log("WebSocket established")
 } catch (e){
 	console.log("no WebSocket connection")
   alert("oops, something went wrong connecting to server - please reload!")
@@ -13,19 +14,19 @@ var ac;
 var wd;
 
 function start(){
-	wd = new WebDirt("sampleMap.json","Dirt-Samples");
-	initWebAudio();
+	wd = new WebDirt("WebDirt/sampleMap.json","WebDirt/Dirt-Samples");
+	wd.initializeWebAudio();
 	document.getElementById("mainBody").style.visibility = "visible";
 	document.getElementById("startButton").style.visibility = "hidden";
 	isActive = true;
- }
-
-
-function initWebAudio(){
-	window.AudioContext = window.AudioContext || window.webkitAudioContext;
-	ac = new AudioContext();
-	console.log("Web Audio Initialized");
 }
+
+//
+// function initWebAudio(){
+// 	window.AudioContext = window.AudioContext || window.webkitAudioContext;
+// 	ac = new AudioContext();
+// 	console.log("Web Audio Initialized");
+// }
 
 
 function testWebAudio(){
