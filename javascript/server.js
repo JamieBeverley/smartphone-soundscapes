@@ -77,9 +77,16 @@ wsServer.on('connection', function(r){
 scOSC.on('message',function(msg){
 
 	if (msg.address =="/play"){
-			msg.portion = msg.portion?msg.portion:1;
-			console.log(msg);
-			wsServer.weightedBroadcast(JSON.stringify(msg),msg.portion);
+		var portion=1;
+		// console.log(msg.args);
+		for (i in msg.args){
+			if (msg.args[i]=='portion'){
+				portion = msg.args[Math.round(i)+1]  //No idea why it needs me to round i but w/
+				break;
+			}
+		}
+		console.log(portion)
+		wsServer.weightedBroadcast(JSON.stringify(msg),portion);
 	} else {
 		console.log("********WARNING: OSC received from SC with no recognized address: "+msg.type)
 		console.log(msg)

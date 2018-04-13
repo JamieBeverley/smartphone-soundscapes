@@ -56,7 +56,6 @@ ws.addEventListener('message', function(message){
 
 	if (msg.address == "/play"){
 		var wdMsg = {};
-		console.log(msg.args)
 		for (var i =0; i<msg.args.length; i=i+2){
 			wdMsg[msg.args[i]] = msg.args[i+1];
 		}
@@ -69,3 +68,31 @@ ws.addEventListener('message', function(message){
     console.log("WARNING: Message received from server with unrecognized message type")
 	}
 })
+
+
+
+
+
+
+
+
+
+function testFunc (){
+	var arr =[]
+	for (var i =0; i<30; i=i+1){
+		var osc = wd.ac.createOscillator()
+		osc.frequency.value = 400 + i;
+		var gain = wd.ac.createGain();
+		gain.gain.value =0.1;
+		osc.connect(gain).connect(wd.ac.destination)
+		osc.start()
+		arr.push(osc)
+	};
+
+	setTimeout(function(){
+		for (i in arr){
+			arr[i].stop();
+			arr[i].disconnect();
+		}
+	},4000)
+}
